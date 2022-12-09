@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import DisplayList from './DisplayList';
 
-const Game = () => {
+const Game = (props) => {
+  const { score, order } = props;
   const [pokemonList, setPokemonList] = useState([]);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Game = () => {
   if (pokemonList)
     return (
       <div className='game'>
-        <DisplayList pokemonList={pokemonList} />
+        <DisplayList pokemonList={pokemonList} score={score} order={order} />
       </div>
     );
 };

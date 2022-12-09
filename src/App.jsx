@@ -7,11 +7,25 @@ import Game from './components/Game';
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const [order, setOrder] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+  const addCurrentScore = () => setCurrentScore(currentScore + 1);
+
+  const shuffleArr = (array) => {
+    const temp = array.slice();
+    temp.sort(() => Math.random() - 0.5);
+    return temp;
+  };
+
+  useEffect(() => {
+    // randomize order when score updates
+    setOrder(shuffleArr(order));
+  }, [currentScore]);
 
   return (
     <div className='App'>
       <Scoreboard currentScore={currentScore} highScore={highScore} />
-      <Game />
+      <Game score={{ addCurrentScore }} order={order} />
     </div>
   );
 }
