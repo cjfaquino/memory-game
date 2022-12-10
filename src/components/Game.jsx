@@ -16,23 +16,23 @@ const Game = (props) => {
         });
     };
 
-    const LIMIT = 15;
-    const offset = Math.floor(Math.random() * 151 + 1 - LIMIT);
+    const limit = order.length;
+    const offset = Math.floor(Math.random() * 151 + 1 - limit);
 
     if (
-      (currentScore % LIMIT === 0 && currentScore !== 0) ||
+      (currentScore % limit === 0 && currentScore !== 0) ||
       currentScore === 0
     ) {
       // initialize or when stage is passed fetch new pokemon
       setPokemonList([]);
 
-      if (currentScore % LIMIT === 0 && currentScore !== 0) {
+      if (currentScore % limit === 0 && currentScore !== 0) {
         // only when stage is passed add stage & fetch new pokemon
         addStage();
       }
 
       fetch(
-        `https://pokeapi.co/api/v2/pokemon/?limit=${LIMIT}&offset=${offset}`
+        `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
       )
         .then((response) => response.json())
         .then((allpokemon) => {

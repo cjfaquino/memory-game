@@ -9,9 +9,7 @@ function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [stage, setStage] = useState(1);
-  const [order, setOrder] = useState([
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-  ]);
+  const [order, setOrder] = useState([...Array(15).keys()]);
 
   const addCurrentScore = () => setCurrentScore(currentScore + 1);
 
