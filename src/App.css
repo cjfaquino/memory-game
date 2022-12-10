@@ -1,11 +1,46 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  min-width: 100%;
   text-align: center;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+}
+
+.sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .game {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  gap: 50px;
+}
+
+.scoreboard {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: sticky;
+  background-color: #242424;
+}
+
+.card-image {
+  width: 96px;
+  height: 96px;
+}
+
+@media (max-width: 500px) {
+  .game {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }

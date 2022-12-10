@@ -27,9 +27,9 @@ const Card = (props) => {
   };
 
   return (
-    <div key={object.id} style={styles} onClick={handleScore}>
-      <img src={object.img_url} alt={object.name} />
-      <div>{object.name}</div>
+    <div className='card' key={object.id} style={styles} onClick={handleScore}>
+      <img className='card-image' src={object.img_url} alt={object.name} />
+      <div className='card-name'>{object.name}</div>
     </div>
   );
 };
