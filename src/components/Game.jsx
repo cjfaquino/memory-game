@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import DisplayList from './DisplayList';
 
 const Game = (props) => {
-  const { score, order } = props;
+  const { score, order, addStage } = props;
+  const { currentScore } = score;
   const [pokemonList, setPokemonList] = useState([]);
 
   useEffect(() => {
@@ -15,12 +16,23 @@ const Game = (props) => {
         });
     };
 
-    const limit = 10;
-    const offset = 0;
+    const LIMIT = 15;
+    const offset = Math.floor(Math.random() * 151 + 1 - LIMIT);
 
-    if (pokemonList.length === 0) {
+    if (
+      (currentScore % LIMIT === 0 && currentScore !== 0) ||
+      currentScore === 0
+    ) {
+      // initialize or when stage is passed fetch new pokemon
+      setPokemonList([]);
+
+      if (currentScore % LIMIT === 0 && currentScore !== 0) {
+        // only when stage is passed add stage & fetch new pokemon
+        addStage();
+      }
+
       fetch(
-        `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
+        `https://pokeapi.co/api/v2/pokemon/?limit=${LIMIT}&offset=${offset}`
       )
         .then((response) => response.json())
         .then((allpokemon) => {
@@ -31,7 +43,7 @@ const Game = (props) => {
     }
 
     return () => {};
-  }, []);
+  }, [currentScore]);
 
   if (pokemonList.length === 0) return <div>Loading...</div>;
 
