@@ -12,6 +12,10 @@ function App() {
 
   const addCurrentScore = () => setCurrentScore(currentScore + 1);
 
+  const resetScore = () => {
+    setCurrentScore(0);
+  };
+
   useEffect(() => {
     // randomize order when score updates
     setOrder(shuffleArr(order));
@@ -20,7 +24,10 @@ function App() {
   return (
     <div className='App'>
       <Scoreboard currentScore={currentScore} highScore={highScore} />
-      <Game score={{ addCurrentScore }} order={order} />
+      <Game
+        score={{ addCurrentScore, resetScore, currentScore }}
+        order={order}
+      />
     </div>
   );
 }
