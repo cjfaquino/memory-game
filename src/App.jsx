@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 import Scoreboard from './components/Scoreboard';
 import Game from './components/Game';
+import shuffleArr from './components/utils/shuffleArr';
 
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
@@ -10,12 +11,6 @@ function App() {
   const [order, setOrder] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
   const addCurrentScore = () => setCurrentScore(currentScore + 1);
-
-  const shuffleArr = (array) => {
-    const temp = array.slice();
-    temp.sort(() => Math.random() - 0.5);
-    return temp;
-  };
 
   useEffect(() => {
     // randomize order when score updates
