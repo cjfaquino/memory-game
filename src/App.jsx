@@ -5,17 +5,20 @@ import Scoreboard from './components/Scoreboard';
 import Game from './components/Game';
 import shuffleArr from './components/utils/shuffleArr';
 
+const orderArr = [...Array(5).keys()];
+
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [stage, setStage] = useState(1);
-  const [order, setOrder] = useState([...Array(15).keys()]);
+  const [order, setOrder] = useState(orderArr);
 
   const addCurrentScore = () => setCurrentScore(currentScore + 1);
 
   const resetScore = () => {
     setStage(1);
     setCurrentScore(0);
+    setOrder(orderArr);
   };
 
   const addStage = () => setStage(stage + 1);
@@ -29,6 +32,12 @@ function App() {
       setHighScore(currentScore);
     }
   }, [currentScore]);
+
+  useEffect(() => {
+    // add more pokemon per stage
+    const num = 5 * (stage + 1);
+    setOrder([...Array(num).keys()]);
+  }, [stage]);
 
   return (
     <div className='App'>

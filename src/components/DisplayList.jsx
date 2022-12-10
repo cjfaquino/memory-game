@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import Card from './Card';
 
 const DisplayList = (props) => {
-  const { pokemonList, score, order } = props;
+  const { pokemonList, clickPokemon, score, order } = props;
 
-  return pokemonList.map((pokemon, index) => {
+  return pokemonList.map((obj, index) => {
+    const { pokeData, clicked } = obj;
     const newObj = {
-      ...pokemon,
-      img_url: pokemon.sprites.front_default,
+      ...pokeData,
+      img_url: pokeData.sprites.front_default,
       order: order[index],
+      clicked,
     };
-    return <Card object={newObj} score={score} />;
+    return <Card clickPokemon={clickPokemon} object={newObj} score={score} />;
   });
 };
 

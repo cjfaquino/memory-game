@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
 
 const Card = (props) => {
-  const { object, score } = props;
+  const { clickPokemon, object, score } = props;
   const { currentScore } = score;
 
-  const [clicked, setClicked] = useState(false);
+  // const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     // handle initialize & score resets
     if (currentScore === 0) {
-      setClicked(false);
+      // setClicked(false);
+      object.clicked = false;
     }
   }, [currentScore]);
 
   const handleScore = () => {
-    if (!clicked) {
+    if (!object.clicked) {
       score.addCurrentScore();
-      setClicked(true);
+      // setClicked(true);
+      clickPokemon(object.id);
+
+      object.clicked = true;
     } else {
       score.resetScore();
     }
@@ -33,7 +37,7 @@ const Card = (props) => {
 
       {/* remove after */}
 
-      {clicked && <div>Clicked</div>}
+      {object.clicked && <div>Clicked</div>}
     </div>
   );
 };

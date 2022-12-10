@@ -6,28 +6,42 @@ const Game = (props) => {
   const { currentScore } = score;
   const [pokemonList, setPokemonList] = useState([]);
 
+  const clickPokemon = (id) => {
+    const newArr = pokemonList.map((obj) => {
+      if (obj.pokeData.id === id) {
+        obj.clicked = true;
+      }
+      return obj;
+    });
+
+    setPokemonList(newArr);
+  };
+
+  const checkAllClicked = () => {
+    if (pokemonList.length !== 0) {
+      return pokemonList.every((obj) => obj.clicked === true);
+    }
+    return false;
+  };
+
   useEffect(() => {
     const fetchPokemonData = (pokemon) => {
       let url = pokemon.url;
       fetch(url)
         .then((response) => response.json())
         .then((pokeData) => {
-          setPokemonList((state) => [...state, pokeData]);
+          setPokemonList((state) => [...state, { pokeData, clicked: false }]);
         });
     };
 
     const limit = order.length;
     const offset = Math.floor(Math.random() * 151 + 1 - limit);
 
-    if (
-      (currentScore % limit === 0 && currentScore !== 0) ||
-      currentScore === 0
-    ) {
+    if (checkAllClicked() || currentScore === 0) {
       // initialize or when stage is passed fetch new pokemon
       setPokemonList([]);
 
-      if (currentScore % limit === 0 && currentScore !== 0) {
-        // only when stage is passed add stage & fetch new pokemon
+      if (checkAllClicked()) {
         addStage();
       }
 
@@ -41,8 +55,6 @@ const Game = (props) => {
           });
         });
     }
-
-    return () => {};
   }, [currentScore]);
 
   if (pokemonList.length === 0) return <div>Loading...</div>;
@@ -50,7 +62,12 @@ const Game = (props) => {
   if (pokemonList)
     return (
       <div className='game'>
-        <DisplayList pokemonList={pokemonList} score={score} order={order} />
+        <DisplayList
+          pokemonList={pokemonList}
+          clickPokemon={clickPokemon}
+          score={score}
+          order={order}
+        />
       </div>
     );
 };
