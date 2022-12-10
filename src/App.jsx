@@ -19,6 +19,11 @@ function App() {
   useEffect(() => {
     // randomize order when score updates
     setOrder(shuffleArr(order));
+
+    // update high score
+    if (highScore <= currentScore) {
+      setHighScore(currentScore);
+    }
   }, [currentScore]);
 
   return (
