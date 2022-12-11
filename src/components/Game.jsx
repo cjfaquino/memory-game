@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DisplayList from './DisplayList';
+import Loading from './Loading/Loading';
 
 const Game = (props) => {
   const { score, order, addStage } = props;
@@ -65,14 +66,16 @@ const Game = (props) => {
     }
   }, [currentScore]);
 
-  const elemClass = 'game';
-
   if (pokemonList.length === 0)
-    return <div className={elemClass}>Loading...</div>;
+    return (
+      <div className='game loading'>
+        <Loading />
+      </div>
+    );
 
   if (pokemonList)
     return (
-      <div className={elemClass}>
+      <div className='game'>
         <DisplayList
           pokemonList={pokemonList}
           clickPokemon={clickPokemon}

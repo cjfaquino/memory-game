@@ -26,6 +26,7 @@
 
 .game {
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 120px;
   grid-auto-rows: 120px;
@@ -65,6 +66,13 @@
 
 @media (max-width: 500px) {
   .game {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
+}
+
+.game.loading {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  align-items: center;
 }
