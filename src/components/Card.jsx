@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import sparkle from '../assets/sparkle.gif';
+
 const Card = (props) => {
   const { clickPokemon, object, score } = props;
   const { currentScore } = score;
@@ -30,6 +32,7 @@ const Card = (props) => {
     <div className='card' key={object.id} style={styles} onClick={handleScore}>
       <img className='card-image' src={object.img_url} alt={object.name} />
       <div className='card-name'>{object.name}</div>
+      {object.shiny && <img className='shiny' src={sparkle} />}
     </div>
   );
 };

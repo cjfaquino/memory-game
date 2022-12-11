@@ -37,9 +37,24 @@
   background-color: #242424;
 }
 
+.card {
+  position: relative;
+}
+
 .card-image {
   width: 96px;
   height: 96px;
+}
+
+.shiny {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: -55px;
+  left: -55px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 @media (max-width: 500px) {

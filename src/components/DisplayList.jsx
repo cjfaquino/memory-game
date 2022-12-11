@@ -17,6 +17,7 @@ const DisplayList = (props) => {
       img_url: icon_url,
       order: order[index],
       clicked,
+      shiny,
     };
     return <Card clickPokemon={clickPokemon} object={newObj} score={score} />;
   });
