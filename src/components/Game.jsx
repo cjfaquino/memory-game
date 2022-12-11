@@ -12,7 +12,7 @@ const Game = (props) => {
   };
 
   const fetchPokemonData = (pokemon) => {
-    let url = pokemon.url;
+    const { url } = pokemon;
     fetch(url)
       .then((response) => response.json())
       .then((pokeData) => {
@@ -36,6 +36,7 @@ const Game = (props) => {
   const clickPokemon = (id) => {
     const newArr = pokemonList.map((obj) => {
       if (obj.pokeData.id === id) {
+        // eslint-disable-next-line no-param-reassign
         obj.clicked = true;
       }
       return obj;
@@ -80,6 +81,8 @@ const Game = (props) => {
         />
       </div>
     );
+
+  return null;
 };
 
 export default Game;

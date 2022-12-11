@@ -7,7 +7,7 @@ import shuffleArr from './components/utils/shuffleArr';
 
 const orderArr = [...Array(5).keys()];
 
-function App() {
+const App = () => {
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [stage, setStage] = useState(1);
@@ -53,6 +53,6 @@ function App() {
       />
     </div>
   );
-}
+};
 
 export default App;

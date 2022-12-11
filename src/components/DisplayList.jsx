@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Card from './Card';
 
 const DisplayList = (props) => {
@@ -7,14 +7,14 @@ const DisplayList = (props) => {
   return pokemonList.map((obj, index) => {
     const { pokeData, clicked, shiny } = obj;
 
-    let icon_url;
-    shiny
-      ? (icon_url = pokeData.sprites.front_shiny)
-      : (icon_url = pokeData.sprites.front_default);
+    let iconURL = pokeData.sprites.front_default;
+    if (shiny) {
+      iconURL = pokeData.sprites.front_shiny;
+    }
 
     const newObj = {
       ...pokeData,
-      img_url: icon_url,
+      img_url: iconURL,
       order: order[index],
       clicked,
       shiny,
