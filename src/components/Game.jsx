@@ -64,11 +64,14 @@ const Game = (props) => {
     }
   }, [currentScore]);
 
-  if (pokemonList.length === 0) return <div>Loading...</div>;
+  const elemClass = 'game';
+
+  if (pokemonList.length === 0)
+    return <div className={elemClass}>Loading...</div>;
 
   if (pokemonList)
     return (
-      <div className='game'>
+      <div className={elemClass}>
         <DisplayList
           pokemonList={pokemonList}
           clickPokemon={clickPokemon}
