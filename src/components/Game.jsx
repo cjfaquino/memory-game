@@ -23,6 +23,16 @@ const Game = (props) => {
       });
   };
 
+  const fetchPokemon = (limit, offset) => {
+    fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
+      .then((response) => response.json())
+      .then((allpokemon) => {
+        allpokemon.results.forEach((pokemon) => {
+          fetchPokemonData(pokemon);
+        });
+      });
+  };
+
   const clickPokemon = (id) => {
     const newArr = pokemonList.map((obj) => {
       if (obj.pokeData.id === id) {
@@ -44,24 +54,13 @@ const Game = (props) => {
   useEffect(() => {
     const limit = order.length;
     const offset = Math.floor(Math.random() * 151 + 1 - limit);
-
     if (checkAllClicked() || currentScore === 0) {
-      // initialize or when stage is passed fetch new pokemon
       setPokemonList([]);
+      fetchPokemon(limit, offset);
+    }
 
-      if (checkAllClicked()) {
-        addStage();
-      }
-
-      fetch(
-        `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
-      )
-        .then((response) => response.json())
-        .then((allpokemon) => {
-          allpokemon.results.forEach((pokemon) => {
-            fetchPokemonData(pokemon);
-          });
-        });
+    if (checkAllClicked()) {
+      addStage();
     }
   }, [currentScore]);
 
