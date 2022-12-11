@@ -6,6 +6,23 @@ const Game = (props) => {
   const { currentScore } = score;
   const [pokemonList, setPokemonList] = useState([]);
 
+  const shinyRoll = () => {
+    const randomNum = Math.floor(Math.random() * 100 + 1);
+    return randomNum < 5;
+  };
+
+  const fetchPokemonData = (pokemon) => {
+    let url = pokemon.url;
+    fetch(url)
+      .then((response) => response.json())
+      .then((pokeData) => {
+        setPokemonList((state) => [
+          ...state,
+          { pokeData, clicked: false, shiny: shinyRoll() },
+        ]);
+      });
+  };
+
   const clickPokemon = (id) => {
     const newArr = pokemonList.map((obj) => {
       if (obj.pokeData.id === id) {
@@ -25,15 +42,6 @@ const Game = (props) => {
   };
 
   useEffect(() => {
-    const fetchPokemonData = (pokemon) => {
-      let url = pokemon.url;
-      fetch(url)
-        .then((response) => response.json())
-        .then((pokeData) => {
-          setPokemonList((state) => [...state, { pokeData, clicked: false }]);
-        });
-    };
-
     const limit = order.length;
     const offset = Math.floor(Math.random() * 151 + 1 - limit);
 
