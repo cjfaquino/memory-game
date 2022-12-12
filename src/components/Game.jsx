@@ -54,7 +54,9 @@ const Game = ({ score, order, addStage }) => {
 
   useEffect(() => {
     const limit = order.length;
-    const offset = Math.floor(Math.random() * 151 + 1 - limit);
+    // up to gen 3 pokemon
+    const offset = Math.floor(Math.random() * 493 + 1 - limit);
+
     if (checkAllClicked() || currentScore === 0) {
       setPokemonList([]);
       fetchPokemon(limit, offset);
