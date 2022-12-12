@@ -1,24 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import sparkle from '../assets/sparkle.gif';
 
-const Card = (props) => {
-  const { clickPokemon, object, score } = props;
-  const { currentScore } = score;
-
-  useEffect(() => {
-    // handle initialize & score resets
-    if (currentScore === 0) {
-      object.clicked = false;
-    }
-  }, [currentScore]);
-
+const Card = ({ clickPokemon, object, score }) => {
   const handleScore = () => {
     if (!object.clicked) {
       score.addCurrentScore();
       clickPokemon(object.id);
-
-      object.clicked = true;
     } else {
       score.resetScore();
     }
