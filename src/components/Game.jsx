@@ -23,13 +23,21 @@ const Game = ({ score, order, addStage }) => {
       });
   };
 
-  const fetchPokemon = (limit, offset) => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
+  const fetchPokemon = (limit, offset, abortController) => {
+    fetch(
+      `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`,
+      { signal: abortController.signal }
+    )
       .then((response) => response.json())
       .then((allpokemon) => {
         allpokemon.results.forEach((pokemon) => {
           fetchPokemonData(pokemon);
         });
+      })
+      .catch((error) => {
+        if (!pokemonList.length === 0) {
+          throw error.message;
+        }
       });
   };
 
@@ -53,18 +61,24 @@ const Game = ({ score, order, addStage }) => {
   };
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     const limit = order.length;
     // up to gen 3 pokemon
     const offset = Math.floor(Math.random() * 493 + 1 - limit);
 
     if (checkAllClicked() || currentScore === 0) {
       setPokemonList([]);
-      fetchPokemon(limit, offset);
+      fetchPokemon(limit, offset, abortController);
     }
 
     if (checkAllClicked()) {
       addStage();
     }
+
+    return () => {
+      abortController.abort();
+    };
   }, [currentScore]);
 
   if (pokemonList.length === 0)
