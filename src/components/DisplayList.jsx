@@ -1,10 +1,8 @@
 import React from 'react';
 import Card from './Card';
 
-const DisplayList = (props) => {
-  const { pokemonList, clickPokemon, score, order } = props;
-
-  return pokemonList.map((obj, index) => {
+const DisplayList = ({ pokemonList, clickPokemon, score, order }) =>
+  pokemonList.map((obj, index) => {
     const { pokeData, clicked, shiny } = obj;
 
     let iconURL = pokeData.sprites.front_default;
@@ -21,6 +19,5 @@ const DisplayList = (props) => {
     };
     return <Card clickPokemon={clickPokemon} object={newObj} score={score} />;
   });
-};
 
 export default DisplayList;

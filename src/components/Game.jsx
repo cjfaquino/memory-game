@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DisplayList from './DisplayList';
 import Loading from './Loading/Loading';
 
-const Game = (props) => {
-  const { score, order, addStage } = props;
+const Game = ({ score, order, addStage }) => {
   const { currentScore } = score;
   const [pokemonList, setPokemonList] = useState([]);
 
