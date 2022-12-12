@@ -13,7 +13,7 @@ const App = () => {
   const [stage, setStage] = useState(1);
   const [order, setOrder] = useState(orderArr);
 
-  const addCurrentScore = () => setCurrentScore(currentScore + 1);
+  const addCurrentScore = () => setCurrentScore((x) => x + 1);
 
   const resetScore = () => {
     setStage(1);
@@ -21,7 +21,7 @@ const App = () => {
     setOrder(orderArr);
   };
 
-  const addStage = () => setStage(stage + 1);
+  const addStage = () => setStage((x) => x + 1);
 
   useEffect(() => {
     // randomize order when score updates
