@@ -67,3 +67,9 @@
     opacity: 0.5;
   }
 }
+
+@media (prefers-color-scheme: light) {
+  .lds-grid div {
+    background: black;
+  }
+}
