@@ -17,7 +17,14 @@ const DisplayList = ({ pokemonList, clickPokemon, score, order }) =>
       clicked,
       shiny,
     };
-    return <Card clickPokemon={clickPokemon} object={newObj} score={score} />;
+    return (
+      <Card
+        key={crypto.randomUUID()}
+        clickPokemon={clickPokemon}
+        object={newObj}
+        score={score}
+      />
+    );
   });
 
 export default DisplayList;
