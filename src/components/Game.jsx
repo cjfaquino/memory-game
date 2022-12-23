@@ -64,8 +64,8 @@ const Game = ({ score, order, addStage }) => {
     const abortController = new AbortController();
 
     const limit = order.length;
-    // up to gen 3 pokemon
-    const offset = Math.floor(Math.random() * 493 + 1 - limit);
+    // up to gen 8 pokemon
+    const offset = Math.floor(Math.random() * 905 - limit);
 
     if (checkAllClicked() || currentScore === 0) {
       setPokemonList([]);
