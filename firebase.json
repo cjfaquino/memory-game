@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "memory-game-3ec2c",
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
